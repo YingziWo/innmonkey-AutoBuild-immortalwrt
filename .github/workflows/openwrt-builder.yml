@@ -63,7 +63,29 @@ jobs:
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
-        
+    
+    - name: list disk space
+      run: |
+         df -hT $PWD
+    
+    - name: 释放Ubuntu磁盘空间
+      uses: jlumbroso/free-disk-space@main
+      with:
+        # this might remove tools that are actuallDy needed,
+        # if set to "true" but frees about 6 GB
+        tool-cache: true
+        # all of these default to true, but feel free to set to
+        # "false" if necessary for your workflow
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        swap-storage: true
+   
+    - name: list disk space
+      run: |
+        df -hT $PWD     
+    
     - name: 克隆源码
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
@@ -96,11 +118,11 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
-    - name: SSH 连接到 Actions
-      uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
-      env:
-        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+   # - name: SSH 连接到 Actions
+   #   uses: P3TERX/ssh2actions@v1.0.0
+   #   if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+   #   env:
+   #     GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
     - name: 下载软件包
       id: package
@@ -111,6 +133,13 @@ jobs:
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
+   # - name: SSH 连接到 Actions
+   #   uses: P3TERX/ssh2actions@v1.0.0
+   #   if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+   #   env:
+   #     GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+    
     - name: 编译固件
       id: compile
       run: |
@@ -125,7 +154,15 @@ jobs:
     - name: 检查磁盘空间
       if: (!cancelled())
       run: df -hT
+   
+    - name: SSH 连接到 Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+      env:
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
+
+    
     - name: 上传 bin 文件夹
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
