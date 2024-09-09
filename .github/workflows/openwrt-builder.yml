@@ -5,9 +5,14 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
+        type: choice
         description: 'SSH connection to Actions'
-        required: false
+        options:
+        - 'false' 
+        - 'true'
         default: 'false'
+        required: true
+        
 #  schedule:
 #   - cron: 0 1 1/7 * *
 
