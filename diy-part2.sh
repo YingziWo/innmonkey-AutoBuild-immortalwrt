@@ -40,8 +40,8 @@ $GITHUB_WORKSPACE/preset-clash-core.sh
 
 echo "
 # mosdns 编译过程出错
-#CONFIG_PACKAGE_luci-app-mosdns=y
-#CONFIG_PACKAGE_luci-i18n-mosdns-zh-cn=y
+# CONFIG_PACKAGE_luci-app-mosdns=y
+# CONFIG_PACKAGE_luci-i18n-mosdns-zh-cn=y
 
 # pushbot
 # CONFIG_PACKAGE_luci-app-pushbot=y
@@ -59,8 +59,8 @@ CONFIG_PACKAGE_luci-app-linkease=y
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_luci-i18n-passwall-zh-cn=y
 
-# smartdns
-CONFIG_PACKAGE_luci-app-smartdns=y
+# smartdns 编译过程出错
+# CONFIG_PACKAGE_luci-app-smartdns=y
 
 # ssr-plus
 CONFIG_PACKAGE_luci-app-ssr-plus=y
