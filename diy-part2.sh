@@ -38,6 +38,7 @@ function git_sparse_clone() {
 chmod -R a+x $GITHUB_WORKSPACE/preset-clash-core.sh
 $GITHUB_WORKSPACE/preset-clash-core.sh
 
+# 增加需要的功能插件
 echo "
 # mosdns 编译过程出错
 # CONFIG_PACKAGE_luci-app-mosdns=y
@@ -68,6 +69,37 @@ CONFIG_PACKAGE_luci-i18n-passwall-zh-cn=y
 #CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
 
 " >> .config
+
+########为增加的插件添加依赖包########
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages brook
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages chinadns-ng
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages dns2socks
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages dns2tcp
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages gn
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages hysteria
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages ipt2socks
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages microsocks
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages naiveproxy
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages pdnsd-alt
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages shadowsocksr-libev
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages shadowsocks-rust
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages simple-obfs
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages sing-box
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages ssocks
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages tcping
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages trojan
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages trojan-go
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages trojan-plus
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages tuic-client
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages v2ray-core
+#git_sparse_clone master https://github.com/kiddin9/openwrt-packages v2ray-geodata
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages v2ray-plugin
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages xray-core
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages xray-plugin
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages lua-neturl
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages redsocks2
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages shadow-tls
+git_sparse_clone master https://github.com/kiddin9/openwrt-packages lua-maxminddb
 
 # 修改默认IP
 sed -i 's/192.168.1.1/192.168.0.2/g' package/base-files/files/bin/config_generate
