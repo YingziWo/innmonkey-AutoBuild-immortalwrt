@@ -8,6 +8,9 @@
 # Blog: https://mlapp.cn
 #=================================================
 
+set -x
+pwd
+ls -l
 echo -e "预置Clash内核"
 mkdir -p feeds/luci/applications/luci-app-openclash/root/etc/openclash/core
 core_path="feeds/luci/applications/luci-app-openclash/root/etc/openclash/core"
