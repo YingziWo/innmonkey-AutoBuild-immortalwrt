@@ -27,7 +27,7 @@ function git_sparse_clone() {
 }
 
 # 添加额外插件
-git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
+#git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns #编译过程出错
 #git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 #git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-aliddns
 #git_sparse_clone master https://github.com/kiddin9/openwrt-packages luci-app-pushbot
@@ -39,9 +39,9 @@ chmod -R a+x $GITHUB_WORKSPACE/preset-clash-core.sh
 $GITHUB_WORKSPACE/preset-clash-core.sh
 
 echo "
-# mosdns
-CONFIG_PACKAGE_luci-app-mosdns=y
-CONFIG_PACKAGE_luci-i18n-mosdns-zh-cn=y
+# mosdns 编译过程出错
+#CONFIG_PACKAGE_luci-app-mosdns=y
+#CONFIG_PACKAGE_luci-i18n-mosdns-zh-cn=y
 
 # pushbot
 # CONFIG_PACKAGE_luci-app-pushbot=y
