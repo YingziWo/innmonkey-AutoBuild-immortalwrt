@@ -9,7 +9,9 @@
 # This is free software, licensed under the MIT License.
 # See /LICENSE for more information.
 #
-
+set -x
+pwd
+ls -l
 
 # 移除要替换的包
 rm -rf feeds/packages/net/v2ray-geodata
@@ -56,18 +58,26 @@ echo "
 
 # 修改默认IP
 sed -i 's/192.168.1.1/192.168.0.2/g' package/base-files/files/bin/config_generate
+cat package/base-files/files/bin/config_generate
 
 # 修改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+cat feeds/luci/collections/luci/Makefile
 
 # 修改主机名
 sed -i 's/ImmortalWrt/OpenWrt/g' package/base-files/files/bin/config_generate
+cat package/base-files/files/bin/config_generate
+pwd
 
 # 修改系统信息
+cat package/emortal/default-settings/files/99-default-settings
 cp -f $GITHUB_WORKSPACE/99-default-settings package/emortal/default-settings/files/99-default-settings
+cat package/emortal/default-settings/files/99-default-settings
 cp -f $GITHUB_WORKSPACE/banner package/base-files/files/etc/banner
 
 # 修改主题背景
+pwd 
+ls -l 
 cp -f $GITHUB_WORKSPACE/argon/img/bg1.jpg feeds/luci/themes/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 cp -f $GITHUB_WORKSPACE/argon/img/argon.svg feeds/luci/themes/luci-theme-argon/htdocs/luci-static/argon/img/argon.svg
 cp -f $GITHUB_WORKSPACE/argon/favicon.ico feeds/luci/themes/luci-theme-argon/htdocs/luci-static/argon/favicon.ico
